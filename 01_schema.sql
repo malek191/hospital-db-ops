@@ -1,0 +1,72 @@
+-- Hospital Database Schema Creation
+SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED;
+
+-- PATIENT table
+CREATE TABLE PATIENT (
+    Patient_ID VARCHAR(10) PRIMARY KEY,
+    Full_Name VARCHAR(100) NOT NULL,
+    DOB DATE NOT NULL,
+    Gender VARCHAR(10) NOT NULL,
+    Contact_Number VARCHAR(15) NOT NULL,
+    Insurance_Number VARCHAR(20) NOT NULL,
+    Address VARCHAR(200) NOT NULL
+);
+
+-- DOCTOR table
+CREATE TABLE DOCTOR (
+    Doctor_ID VARCHAR(10) PRIMARY KEY,
+    Full_Name VARCHAR(100) NOT NULL,
+    Department VARCHAR(50) NOT NULL,
+    Contact_Number VARCHAR(15) NOT NULL,
+    Email VARCHAR(100) NOT NULL
+);
+
+-- APPOINTMENT table
+CREATE TABLE APPOINTMENT (
+    Appointment_ID VARCHAR(10) PRIMARY KEY,
+    Patient_ID VARCHAR(10) NOT NULL,
+    Doctor_ID VARCHAR(10) NOT NULL,
+    Department VARCHAR(50) NOT NULL,
+    Appointment_Date DATE NOT NULL,
+    Appointment_Time TIME NOT NULL,
+    Status VARCHAR(20) NOT NULL,
+    FOREIGN KEY (Patient_ID) REFERENCES PATIENT(Patient_ID),
+    FOREIGN KEY (Doctor_ID) REFERENCES DOCTOR(Doctor_ID)
+);
+
+-- LABTEST table
+CREATE TABLE LABTEST (
+    Lab_Order_ID VARCHAR(10) PRIMARY KEY,
+    Patient_ID VARCHAR(10) NOT NULL,
+    Test_Type VARCHAR(50) NOT NULL,
+    Order_Date DATE NOT NULL,
+    Scheduled_Date DATE NOT NULL,
+    Result VARCHAR(20) NOT NULL,
+    FOREIGN KEY (Patient_ID) REFERENCES PATIENT(Patient_ID)
+);
+
+-- PRESCRIPTION table
+CREATE TABLE PRESCRIPTION (
+    Prescription_ID VARCHAR(10) PRIMARY KEY,
+    Patient_ID VARCHAR(10) NOT NULL,
+    Doctor_ID VARCHAR(10) NOT NULL,
+    Date_Issued DATE NOT NULL,
+    Medication_Name VARCHAR(100) NOT NULL,
+    Dosage VARCHAR(50) NOT NULL,
+    Frequency VARCHAR(100) NOT NULL,
+    FOREIGN KEY (Patient_ID) REFERENCES PATIENT(Patient_ID),
+    FOREIGN KEY (Doctor_ID) REFERENCES DOCTOR(Doctor_ID)
+);
+
+-- BILLING table
+CREATE TABLE BILLING (
+    Bill_ID VARCHAR(10) PRIMARY KEY,
+    Patient_ID VARCHAR(10) NOT NULL,
+    Service_Type VARCHAR(100) NOT NULL,
+    Service_Date DATE NOT NULL,
+    Amount_Charged DECIMAL(10,2) NOT NULL,
+    Amount_Paid DECIMAL(10,2) NOT NULL,
+    Payment_Date DATE,
+    Payment_Status VARCHAR(20) NOT NULL,
+    FOREIGN KEY (Patient_ID) REFERENCES PATIENT(Patient_ID)
+);

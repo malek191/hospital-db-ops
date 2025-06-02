@@ -1,0 +1,26 @@
+-- Hospital Database Verification
+SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED;
+
+-- Verify isolation level is set correctly
+SELECT @@SESSION.transaction_isolation;
+
+-- Check all tables were created
+SHOW TABLES;
+
+-- Verify record counts
+SELECT 'PATIENT' as Table_Name, COUNT(*) as Record_Count FROM PATIENT
+UNION ALL
+SELECT 'DOCTOR', COUNT(*) FROM DOCTOR
+UNION ALL
+SELECT 'APPOINTMENT', COUNT(*) FROM APPOINTMENT
+UNION ALL
+SELECT 'LABTEST', COUNT(*) FROM LABTEST
+UNION ALL
+SELECT 'PRESCRIPTION', COUNT(*) FROM PRESCRIPTION
+UNION ALL
+SELECT 'BILLING', COUNT(*) FROM BILLING;
+
+-- Sample data verification
+SELECT * FROM PATIENT WHERE Patient_ID = 'P1001';
+SELECT * FROM APPOINTMENT WHERE Patient_ID = 'P1001';
+SELECT * FROM BILLING WHERE Payment_Status = 'Pending';

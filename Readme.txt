@@ -1,6 +1,5 @@
 Team details:
-	- Malek Moussa: NZ85414
-	- Youssef Tafesh: MJ35774
+	- Malek 
 
 
 
@@ -119,3 +118,4 @@ Challenges I faced and how I addressed them:
 			- Enhanced with:  
 				- Custom error messages via `SIGNAL SQLSTATE 45000`  
 				- Context-specific messages (e.g., "Cannot schedule in past")  
+
